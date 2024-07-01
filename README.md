@@ -36,7 +36,7 @@ I couldn't find official information, but a16z funders and other funders of well
 sudo apt update && sudo apt upgrade -y
 ```
 
-**2. Install the Bash script:**   
+**2. Install the Bash script:**
 ```
 source <(curl -s https://itrocket.net/api/testnet/pryzm/autoinstall/)
 ```
@@ -94,13 +94,13 @@ WALLET_ADDRESS=$(pryzmd keys show $WALLET -a)
 VALOPER_ADDRESS=$(pryzmd keys show $WALLET --bech val -a)
 ```
 
-**10. Before creating the validator, let's check the node synchronization status once again:** 
+**10. Before creating the validator, let's check the node synchronization status once again:**
 
 ```
 pryzmd status 2>&1 | jq .SyncInfo
 ```
 
-**11. Go to [faucet](https://testnet.pryzm.zone/faucet), request tokens.** 
+**11. Go to [faucet](https://testnet.pryzm.zone/faucet), request tokens.**
 
 **12. Once received, let's create a validator. To do this, enter the following command:**
 
@@ -123,13 +123,13 @@ pryzmd tx staking create-validator \
 
 **Replace the following values with your own values:**
 
-*- "moniker" : Specify in quotes the name of your node that you specified when you ran the Bash script;*- "moniker" : Specify any description you wish.
+*- "moniker" : Specify in quotes the name of your node that you specified when you ran the Bash script;*
+*- "details" : Specify any description you wish. You can leave it as in the example.*
 
-*- "details" : Specify any description. You can leave it as in the example.
 
 **13. Enter the wallet password, the transaction should be successfully executed. Copy the transaction hash returned by the server and go to [explorer](https://testnet.chainsco.pe/pryzm/validators)**.
 
-** IMPORTANT: Your validator will have an "inactive" status. In order for your validator to change its status to "active" you need to start delegating tokens to other validators, as well as make it so that tokens are also delegated to you. To do this, you can go to the Discord of the project and ask to delegate tokens to your validator's address. You can find out the address of the validator in Explorer.
+**IMPORTANT: Your validator will have an "inactive" status. In order for your validator to change its status to "active" you need to start delegating tokens to other validators, as well as make it so that tokens are also delegated to you. To do this, you can go to the Discord of the project and ask to delegate tokens to your validator's address. You can find out the address of the validator in Explorer.**
 
 **Cheat sheet on commands:**
 
@@ -139,7 +139,7 @@ pryzmd tx staking create-validator \
 sudo journalctl -u pryzmd -f
 ```
 
-**2. Check node synchronization:** 
+**2. Check node synchronization:**
 
 ```
 pryzmd status 2>&1 | jq .SyncInfo
@@ -157,7 +157,7 @@ pryzmd status 2>&1 | jq .NodeInfo
 sudo systemctl restart pryzmd
 ```
 
-**5. Restore the wallet:** 
+**5. Restore the wallet:**
 
 ```
 pryzmd keys add $WALLET --recover
@@ -175,19 +175,21 @@ pryzmd keys list
 pryzmd q bank balances $(pryzmd keys show $WALLET -a)
 ```
 
-**8. Validator information:** 
+**8. Validator information:**
 
 ```
 pryzmd status 2>&1 | jq .ValidatorInfo
 ```
 
-**9. Prison information:** ``` pryzmd status 2>&1 | jq .ValidatorInfo 
-
+**9. Prison information:**
+``` 
+pryzmd status 2>&1 | jq .ValidatorInfo 
+```
 ```
 pryzmd q slashing signing-info $(pryzmd tendermint show-validator)
 ```
 
-**10. Get the validator out of jail:** 
+**10. Get the validator out of jail:**
 
 ```
 pryzmd tx slashing unjail --from $WALLET --chain-id indigo-1 --fees 3000upryzm -y
