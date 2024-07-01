@@ -124,6 +124,7 @@ pryzmd tx staking create-validator \
 **Replace the following values with your own values:**
 
 *- "moniker" : Specify in quotes the name of your node that you specified when you ran the Bash script;*
+
 *- "details" : Specify any description you wish. You can leave it as in the example.*
 
 
