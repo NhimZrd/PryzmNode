@@ -67,42 +67,42 @@ sudo mv $HOME/pryzmd $(which pryzmd)
 sudo systemctl restart pryzmd && sudo journalctl -u pryzmd -f
 ```
 
-**Пойдут логи, так же выходим из них комбинациях CTRL+C.**
+**Logs will be displayed, also exit them by CTRL+C.**
 
-**6. Проверяем статус синхронизации ноды. Ждем, когда значение "catching_up" изменится с "true" на "false":**
+**6. Check the status of node synchronization. Wait for the value of "catching_up" to change from "true" to "false":**
 
 ```
 pryzmd status 2>&1 | jq .SyncInfo
 ```
 
-**7. Как только "catching_up" изменился на "false", переходим к созданию кошелька. "$WALLET" замените на имя кошелька, которое Вы присвоили в Bash-скрипте:**
+**7. Once "catching_up" has changed to "false", we move on to creating the wallet. Replace "$WALLET" with the wallet name you assigned in the Bash script:**
 
 ```
 pryzmd keys add $WALLET
 ```
 
-**Создаем passpharse(пароль Вашего кошелька). Вводим его два раза, после чего сохраняем адрес кошелька, а также seed-фразу(mnemonic phrase) в надежное место.**
+**Create passpharse (your wallet password). Enter it twice, then save the wallet address and the seed phrase to a safe place.
 
-**8. Далее исполняем такую команду. "$WALLET" замените на имя Вашего кошелька:**
+**8. Next, we execute the following command. Replace "$WALLET" with the name of your wallet:**
 ```
 WALLET_ADDRESS=$(pryzmd keys show $WALLET -a)
 ```
 
-**9. Также меняем "$WALLET" на имя Вашего кошелька. Вводим passphrase:**
+**9. Also change "$WALLET" to the name of your wallet. Enter passphrase:**
 
 ```
 VALOPER_ADDRESS=$(pryzmd keys show $WALLET --bech val -a)
 ```
 
-**10. Перед созданием валидатора еще раз проверим статус синхронизации ноды:**
+**10. Before creating the validator, let's check the node synchronization status once again:** 
 
 ```
 pryzmd status 2>&1 | jq .SyncInfo
 ```
 
-**11. Переходим в [кран](https://testnet.pryzm.zone/faucet), запрашиваем токены.**
+**11. Go to [faucet](https://testnet.pryzm.zone/faucet), request tokens.** 
 
-**12. После получения создадим валидатора. Для этого введем такую команду:**
+**12. Once received, let's create a validator. To do this, enter the following command:**
 
 ```
 pryzmd tx staking create-validator \
